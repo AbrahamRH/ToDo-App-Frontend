@@ -2,7 +2,8 @@ export default function PriorityForm({ enviarDatos }) {
   return (
     <label>
       Priority: 
-      <select value="All" onChange={enviarDatos}>
+      <select name="priority" onChange={enviarDatos}>
+        <option value="">All, High, Medium, Low</option>
         <option value="All">All</option>
         <option value="High">High</option>
         <option value="Medium">Medium</option>
