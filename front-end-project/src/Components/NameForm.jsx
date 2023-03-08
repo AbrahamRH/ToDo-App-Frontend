@@ -1,8 +1,7 @@
-
 export default function NameForm({enviarDatos }) {
   return (
     <label>
-      Name:
+      Name: 
       <input
         type="text"
         name="name"
