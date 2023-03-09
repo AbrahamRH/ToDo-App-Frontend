@@ -1,0 +1,31 @@
+.controls {
+    display: grid;
+    grid-template-columns: repeat(1, .2fr 2fr 1fr);
+    padding:  20px 50px;
+    border: solid 1px #000;
+    gap: 5% ;
+}
+
+
+.controls_name {
+    grid-column: 2/4; 
+}
+
+.controls_priority {
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.controls_state {
+    grid-column: 2/3;
+    grid-row: 3/3;
+}
+
+.controls_label_state {
+    grid-column: 1/2;
+    grid-row: 3/3;
+}
+
+.controls_button {
+    grid-row: 3/3;
+}

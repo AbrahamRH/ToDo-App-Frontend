@@ -1,13 +1,13 @@
-export default function NameForm({enviarDatos }) {
+export default function NameForm({ sendData }) {
   return (
-    <label>
-      Name: 
+    <>
+      <label for="name" className="controls_label_name">Name:</label>
       <input
         type="text"
         name="name"
-        className="controlName"
-        onChange={enviarDatos}
+        className="controls_name"
+        onChange={sendData}
       ></input>
-    </label>
+    </>
   );
 }

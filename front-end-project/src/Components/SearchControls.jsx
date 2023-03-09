@@ -1,6 +1,7 @@
 import NameForm from "./NameForm.jsx";
 import PriorityForm from "./PriorityForm.jsx";
 import StateForm from "./StateForm.jsx";
+import ButtonForm from "./ButtonForm.jsx";
 
 import { useState } from "react";
 
@@ -20,14 +21,11 @@ export default function SearchControls() {
   };
 
   return (
-    <form>
-      <NameForm enviarDatos={handleOnChange} />
-      <br />
-      <PriorityForm enviarDatos={handleOnChange} />
-      <br />
-      <StateForm enviarDatos={handleOnChange} />
-      <br />
-      <button onClick={handleButtonChange}>Enviar</button>
+    <form className="controls">
+      <NameForm sendData={handleOnChange} />
+      <PriorityForm sendData={handleOnChange} />
+      <StateForm sendData={handleOnChange} />
+      <ButtonForm sendData={handleButtonChange}/>
     </form>
   );
 }
