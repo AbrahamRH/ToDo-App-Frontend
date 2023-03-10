@@ -3,7 +3,7 @@ import "../Assets/Styles/PriorityForm.css";
 export default function PriorityForm({ sendData }) {
   return (
     <>
-      <label for="priority" className="controls_label_priority">Priority:</label>
+      <label htmlFor="priority" className="controls_label_priority">Priority:</label>
       <select className="controls_priority" name="priority" onChange={sendData}>
         <option value="">All, High, Medium, Low</option>
         <option value="All">All</option>
