@@ -4,7 +4,7 @@ import Button from "./ButtonForm";
 
 import { useState } from "react";
 
-export default function Modal({ toggleModal }) {
+export default function Modal({ toggleModal, handleAPI }) {
   const [todoValues, setTodoValues] = useState({
     name: "",
     priority: "LOW",
@@ -20,14 +20,14 @@ export default function Modal({ toggleModal }) {
   };
 
   const handleButtonChange = (e) => {
-    alert(
-      "Nombre: " +
-        todoValues.name +
-        "\nPriority: " +
-        todoValues.priority +
-        "\nDueDate: " +
-        todoValues.dueDate
-    );
+    e.preventDefault();
+    const todo = {
+      name: todoValues.name,
+      priority: todoValues.priority,
+      dueDate: todoValues.dueDate,
+    };
+    console.log(handleAPI('POST', '/todos', todo));
+    toggleModal();
   };
 
   return (
@@ -39,7 +39,7 @@ export default function Modal({ toggleModal }) {
         </button>
         <h2>Create a task</h2>
         <form className="modal_controls">
-          <NameInput sendData={handleOnChange} isRequired={true}/>
+          <NameInput sendData={handleOnChange} isRequired={true} />
           <PrioritySelect sendData={handleOnChange} />
           <DateInput sendData={handleOnChange} />
           <Button sendData={handleButtonChange} message={"Create To Do"} />
@@ -49,16 +49,19 @@ export default function Modal({ toggleModal }) {
   );
 }
 
-
-function PrioritySelect ({sendData}) {
+function PrioritySelect({ sendData }) {
   return (
     <>
-      <label htmlFor="priority" className="controls_label_priority">Priority:</label>
-      <select className="controls_priority" name="priority" onChange={sendData}>
-        <option value="LOW" selected>Low</option>
+      <label htmlFor="priority" className="controls_label_priority">
+        Priority:
+      </label>
+      <select defaultValue="LOW" className="controls_priority" name="priority" onChange={sendData}>
+        <option value="LOW">
+          Low
+        </option>
         <option value="MEDIUM">Medium</option>
         <option value="HIGH">High</option>
       </select>
     </>
-  )
+  );
 }
