@@ -1,5 +1,5 @@
-export default function ButtonForm({sendData}){
+export default function ButtonForm({sendData, message}){
   return(
-      <button onClick={sendData} className="controls_button">Search</button>
+      <button onClick={sendData} className="controls_button">{message}</button>
   )
 }

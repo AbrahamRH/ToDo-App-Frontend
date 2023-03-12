@@ -6,10 +6,10 @@ export default function PriorityForm({ sendData }) {
       <label htmlFor="priority" className="controls_label_priority">Priority:</label>
       <select className="controls_priority" name="priority" onChange={sendData}>
         <option value="">All, High, Medium, Low</option>
-        <option value="All">All</option>
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
+        <option value="ALL">All</option>
+        <option value="HIGH">High</option>
+        <option value="MEDIUM">Medium</option>
+        <option value="LOW">Low</option>
       </select>
     </>
   );
