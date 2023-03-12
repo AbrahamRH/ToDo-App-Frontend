@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function Modal({ toggleModal }) {
   const [todoValues, setTodoValues] = useState({
     name: "",
-    priority: "",
+    priority: "LOW",
     dueDate: "",
   });
 
@@ -39,7 +39,7 @@ export default function Modal({ toggleModal }) {
         </button>
         <h2>Create a task</h2>
         <form className="modal_controls">
-          <NameInput sendData={handleOnChange} />
+          <NameInput sendData={handleOnChange} isRequired={true}/>
           <PrioritySelect sendData={handleOnChange} />
           <DateInput sendData={handleOnChange} />
           <Button sendData={handleButtonChange} message={"Create To Do"} />
@@ -55,7 +55,7 @@ function PrioritySelect ({sendData}) {
     <>
       <label htmlFor="priority" className="controls_label_priority">Priority:</label>
       <select className="controls_priority" name="priority" onChange={sendData}>
-        <option value="LOW">Low</option>
+        <option value="LOW" selected>Low</option>
         <option value="MEDIUM">Medium</option>
         <option value="HIGH">High</option>
       </select>
