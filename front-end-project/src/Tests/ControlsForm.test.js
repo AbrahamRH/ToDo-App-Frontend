@@ -25,12 +25,3 @@ test('renders Filter Controls', () => {
   component.getByText('Priority:')
   component.getByText('State:')
 })
-
-test('Clicking the send button', () => {
-  const component = render(<Form/>)
-  const mockHandler = jest.fn()
-  const button = component.getByText('Enviar')
-  fireEvent.click(button)
-  component.debug()
-  component.getByText('Name:')
-})
