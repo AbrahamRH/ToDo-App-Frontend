@@ -27,6 +27,7 @@ export default function Modal({ toggleModal, handleAPI }) {
       dueDate: todoValues.dueDate,
     };
     console.log(handleAPI('POST', '/todos', todo));
+    toggleModal();
   };
 
   return (
@@ -54,8 +55,8 @@ function PrioritySelect({ sendData }) {
       <label htmlFor="priority" className="controls_label_priority">
         Priority:
       </label>
-      <select className="controls_priority" name="priority" onChange={sendData}>
-        <option value="LOW" selected>
+      <select defaultValue="LOW" className="controls_priority" name="priority" onChange={sendData}>
+        <option value="LOW">
           Low
         </option>
         <option value="MEDIUM">Medium</option>
