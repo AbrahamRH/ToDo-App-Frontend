@@ -16,8 +16,8 @@ export default function SearchControls() {
       [name]: value
     }))
   }
-  const handleButtonChange = (e) => {
-    alert("Nombre: " + values.name + "\nPriority:" + values.priority + "\nState:" + values.state);
+  const handleButtonChange = () => {
+    alert("Nombre: " + values.name + "\nPriority: " + values.priority + "\nState: " + values.state);
   };
 
   return (
@@ -25,7 +25,7 @@ export default function SearchControls() {
       <NameForm sendData={handleOnChange} />
       <PriorityForm sendData={handleOnChange} />
       <StateForm sendData={handleOnChange} />
-      <ButtonForm sendData={handleButtonChange}/>
+      <ButtonForm sendData={handleButtonChange} message={"Search"}/>
     </form>
   );
 }

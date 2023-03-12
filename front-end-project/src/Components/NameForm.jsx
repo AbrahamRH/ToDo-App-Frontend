@@ -1,7 +1,7 @@
 export default function NameForm({ sendData }) {
   return (
     <>
-      <label for="name" className="controls_label_name">Name:</label>
+      <label htmlFor="name" className="controls_label_name">Name:</label>
       <input
         type="text"
         name="name"
