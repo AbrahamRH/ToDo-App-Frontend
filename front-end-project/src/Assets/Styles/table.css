@@ -21,6 +21,10 @@
   width: auto;
 }
 
+.todo-table .checkbox {
+  text-align: center;
+}
+
 .check {
   width: 5%;
 }
