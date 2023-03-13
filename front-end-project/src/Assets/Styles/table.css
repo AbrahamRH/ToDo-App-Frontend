@@ -36,3 +36,8 @@
 .table-actions {
   width: 15%;
 }
+
+.todo-table .no-content {
+  text-align: center;
+  align-items: center;
+}
