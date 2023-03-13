@@ -1,3 +1,4 @@
+import '../Assets/Styles/table.css'
 import TodoRow from "./TodoRow";
 import { useContext } from "react";
 import { TodoContext } from "../Context/TodosContext";
@@ -5,14 +6,14 @@ import { TodoContext } from "../Context/TodosContext";
 export default function TodosTable() {
   const {todos} = useContext(TodoContext);
   return (
-    <table>
-      <thead>
+    <table className="todo-table">
+      <thead className="table-head">
         <tr>
-          <th></th>
-          <th>Name</th>
-          <th>Priority</th>
-          <th>Due Date</th>
-          <th>Actions</th>
+          <th className='check'></th>
+          <th className='table-name'>Name</th>
+          <th className='table-priority'>Priority</th>
+          <th className='table-due-date'>Due Date</th>
+          <th className='table-actions'>Actions</th>
         </tr>
       </thead>
       <tbody>

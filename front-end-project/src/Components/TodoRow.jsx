@@ -5,7 +5,7 @@ export default function TodoRow({ todo }) {
       <td>{todo.name}</td>
       <td>{todo.priority}</td>
       <td>{todo.dueDate}</td>
-      <td>
+      <td className="button-data">
         <button>Update</button> <button>Delete</button>
       </td>
     </tr>

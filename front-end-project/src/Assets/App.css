@@ -1,0 +1,8 @@
+.App {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.App *  {
+  margin: 3px;
+}

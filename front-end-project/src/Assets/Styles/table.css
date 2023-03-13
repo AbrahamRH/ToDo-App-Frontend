@@ -1,0 +1,34 @@
+
+.todo-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #000;
+}
+
+.todo-table th {
+  background-color: #e4e4e4;
+}
+
+.todo-table th, .todo-table td {
+  padding: 5px;
+  text-align: left;
+  border: solid 1px #777;
+}
+
+.todo-table .button-data {
+  text-align: center;
+  padding:1px;
+  width: auto;
+}
+
+.check {
+  width: 5%;
+}
+
+.table-name {
+  width: 45%;
+}
+
+.table-actions {
+  width: 15%;
+}
