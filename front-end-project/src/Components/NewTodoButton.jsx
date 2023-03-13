@@ -20,7 +20,7 @@ export default function NewTodoButton() {
       <button onClick={toggleModal} className="btn-modal">
         + New To Do
       </button>
-      {modal && <Modal toggleModal={toggleModal} />}
+      {modal && <Modal toggleModal={toggleModal} toCreateTodo={true} />}
     </>
   );
 }

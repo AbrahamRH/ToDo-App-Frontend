@@ -6,8 +6,8 @@ import handleAPI from "../Utils/API";
 import { useState, useContext } from "react";
 import { TodoContext } from "../Context/TodosContext";
 
-export default function Modal({ toggleModal }) {
-  const { createTodo } = useContext(TodoContext);
+export default function Modal({ toggleModal, toCreateTodo, todoId }) {
+  const { createTodo, updateTodo } = useContext(TodoContext);
 
   const [todoValues, setTodoValues] = useState({
     name: "",
@@ -30,7 +30,11 @@ export default function Modal({ toggleModal }) {
       dueDate: todoValues.dueDate,
     };
 
-    handleAPI("POST", "/todos", todo).then((data) => createTodo(data));
+    if (toCreateTodo) {
+      handleAPI("POST", "/todos", todo).then((data) => createTodo(data));
+    } else {
+      updateTodo(todoId, todo);
+    }
   };
 
   return (
