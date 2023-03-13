@@ -1,15 +1,9 @@
-import { useEffect, useState } from "react";
 import TodoRow from "./TodoRow";
+import { useContext } from "react";
+import { TodoContext } from "../Context/TodosContext";
 
-export default function TodosTable({ handleAPI }) {
-  const [todos, setTodos] = useState([]);
-
-  useEffect(() => {
-    handleAPI("GET").then((data) => {
-      setTodos(data);
-    });
-  }, []);
-
+export default function TodosTable() {
+  const {todos} = useContext(TodoContext);
   return (
     <table>
       <thead>

@@ -1,10 +1,14 @@
 import NameInput from "./NameForm";
 import DateInput from "./DateInput";
 import Button from "./ButtonForm";
+import handleAPI from "../Utils/API";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { TodoContext } from "../Context/TodosContext";
 
-export default function Modal({ toggleModal, handleAPI }) {
+export default function Modal({ toggleModal }) {
+  const { createTodo } = useContext(TodoContext);
+
   const [todoValues, setTodoValues] = useState({
     name: "",
     priority: "LOW",
@@ -20,14 +24,13 @@ export default function Modal({ toggleModal, handleAPI }) {
   };
 
   const handleButtonChange = (e) => {
-    e.preventDefault();
     const todo = {
       name: todoValues.name,
       priority: todoValues.priority,
       dueDate: todoValues.dueDate,
     };
-    handleAPI("POST", "/todos", todo).then((data) => console.log(data));
-    toggleModal();
+
+    handleAPI("POST", "/todos", todo).then((data) => createTodo(data));
   };
 
   return (
