@@ -2,7 +2,7 @@ import Modal from "./Modal";
 import '../Assets/Styles/modal.css'
 import { useState } from "react";
 
-export default function NewTodoButton({handleAPI}) {
+export default function NewTodoButton() {
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
@@ -20,7 +20,7 @@ export default function NewTodoButton({handleAPI}) {
       <button onClick={toggleModal} className="btn-modal">
         + New To Do
       </button>
-      {modal && <Modal toggleModal={toggleModal} handleAPI={handleAPI} />}
+      {modal && <Modal toggleModal={toggleModal} toCreateTodo={true} />}
     </>
   );
 }

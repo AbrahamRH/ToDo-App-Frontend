@@ -1,13 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './Assets/index.css';
-import App from './Components/App';
-import reportWebVitals from './Utils/reportWebVitals';
+import "./Assets/index.css";
+import App from "./Components/App";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import reportWebVitals from "./Utils/reportWebVitals";
+import { TodosContextProvider } from "./Context/TodosContext";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <TodosContextProvider>
+      <App />
+    </TodosContextProvider>
   </React.StrictMode>
 );
 

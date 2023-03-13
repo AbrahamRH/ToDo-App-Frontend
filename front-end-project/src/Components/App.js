@@ -1,13 +1,14 @@
-import '../Assets/App.css';
-import SearchControls from './SearchControls'
-import NewTodoButton from './NewTodoButton';
-import handleAPI from '../Utils/API';
+import "../Assets/App.css";
+import SearchControls from "./SearchControls";
+import NewTodoButton from "./NewTodoButton";
+import TodosTable from "./TodosTable";
 
 function App() {
   return (
     <div className="App">
-      <SearchControls handleAPI={handleAPI}/>
-      <NewTodoButton handleAPI={handleAPI}/>
+      <SearchControls />
+      <NewTodoButton />
+      <TodosTable />
     </div>
   );
 }

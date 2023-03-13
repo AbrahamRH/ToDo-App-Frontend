@@ -1,10 +1,14 @@
 import NameInput from "./NameForm";
 import DateInput from "./DateInput";
 import Button from "./ButtonForm";
+import handleAPI from "../Utils/API";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { TodoContext } from "../Context/TodosContext";
 
-export default function Modal({ toggleModal, handleAPI }) {
+export default function Modal({ toggleModal, toCreateTodo, todoId }) {
+  const { createTodo, updateTodo } = useContext(TodoContext);
+
   const [todoValues, setTodoValues] = useState({
     name: "",
     priority: "LOW",
@@ -20,14 +24,17 @@ export default function Modal({ toggleModal, handleAPI }) {
   };
 
   const handleButtonChange = (e) => {
-    e.preventDefault();
     const todo = {
       name: todoValues.name,
       priority: todoValues.priority,
       dueDate: todoValues.dueDate,
     };
-    console.log(handleAPI('POST', '/todos', todo));
-    toggleModal();
+
+    if (toCreateTodo) {
+      handleAPI("POST", "/todos", todo).then((data) => createTodo(data));
+    } else {
+      updateTodo(todoId, todo);
+    }
   };
 
   return (
@@ -55,10 +62,13 @@ function PrioritySelect({ sendData }) {
       <label htmlFor="priority" className="controls_label_priority">
         Priority:
       </label>
-      <select defaultValue="LOW" className="controls_priority" name="priority" onChange={sendData}>
-        <option value="LOW">
-          Low
-        </option>
+      <select
+        defaultValue="LOW"
+        className="controls_priority"
+        name="priority"
+        onChange={sendData}
+      >
+        <option value="LOW">Low</option>
         <option value="MEDIUM">Medium</option>
         <option value="HIGH">High</option>
       </select>
