@@ -7,6 +7,12 @@ export const TodoContext = createContext();
 export function TodosContextProvider(props) {
   const [todos, setTodos] = useState([]);
   const [todoDeleted, setTodoDeleted] = useState(false);
+  const [requestParams, setRequestParams] = useState({
+    method: "GET",
+    endpoint: "/todos",
+    body: {},
+    params: ""
+  });
 
   function createTodo(todo) {
     setTodos(todos.push(todo));
@@ -21,23 +27,30 @@ export function TodosContextProvider(props) {
   }
 
   function deleteTodo(id) {
-    handleAPI("DELETE","/todos/"+id);
+    handleAPI("DELETE", "/todos/" + id);
     setTodoDeleted(!todoDeleted);
   }
 
   function updateTodo(id, todo) {
-    handleAPI("PUT", "/todos/"+id, todo);
+    handleAPI("PUT", "/todos/" + id, todo);
   }
 
   useEffect(() => {
-    handleAPI("GET").then((data) => {
+    handleAPI(...Object.values(requestParams)).then((data) => {
       setTodos(data);
     });
   }, [todoDeleted]);
 
   return (
     <TodoContext.Provider
-      value={{ todos, createTodo, setTodoDone, setTodoUndone, deleteTodo, updateTodo}}
+      value={{
+        todos,
+        createTodo,
+        setTodoDone,
+        setTodoUndone,
+        deleteTodo,
+        updateTodo,
+      }}
     >
       {props.children}
     </TodoContext.Provider>
