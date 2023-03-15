@@ -4,6 +4,7 @@
     padding:  20px 50px;
     border: solid 1px #000;
     gap: 5% ;
+    align-self: stretch;
 }
 
 .controls_name {
