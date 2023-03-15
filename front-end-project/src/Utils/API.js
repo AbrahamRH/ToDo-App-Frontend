@@ -4,15 +4,38 @@ export default async function handleAPI(
   method,
   endpoint = "/todos",
   body = {},
-  params = ""
+  params = "",
+  page
 ) {
   try {
-    const request = (params === "") ? url + endpoint : url + endpoint + "?" + params;
+    const request =
+      params === ""
+        ? url + endpoint + "?pageNumber=" + page
+        : url + endpoint + "?pageNumber=" + page + params;
+    console.log(request);
     const response = await fetch(request, settings(method, body));
     const data = await response.json();
-    return data;
+    if (data.error == null) {
+      return data;
+    } else {
+      const data = {
+        content: [],
+        number: 0,
+        totalPages: 0,
+        first: true,
+        last: true,
+      };
+      return data;
+    }
   } catch (e) {
-    return e;
+    const data = {
+      content: [],
+      number: 0,
+      totalPages: 0,
+      first: true,
+      last: true,
+    };
+    return data;
   }
 }
 
