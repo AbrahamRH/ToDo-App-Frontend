@@ -9,7 +9,6 @@ export default async function handleAPI(
   try {
     const request = (params === "") ? url + endpoint : url + endpoint + "?" + params;
     const response = await fetch(request, settings(method, body));
-    console.log(request)
     const data = await response.json();
     return data;
   } catch (e) {
