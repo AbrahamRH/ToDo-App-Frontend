@@ -14,6 +14,25 @@ export function TodosContextProvider(props) {
     params: "",
   });
 
+  const [pagesInfo, setPagesInfo] = useState({
+    number: 0,
+    totalPages: 0,
+    first: true,
+    last: false,
+  });
+
+  useEffect(() => {
+    handleAPI(...Object.values(requestParams)).then((data) => {
+      setTodos(data.content);
+      setPagesInfo({
+        number: data.number,
+        totalPages: data.totalPages,
+        first: data.first,
+        last: data.last,
+      });
+    });
+  }, [todosChange]);
+
   function createTodo(todo) {
     setTodos(todos.push(todo));
   }
@@ -36,20 +55,14 @@ export function TodosContextProvider(props) {
   }
 
   function searchTodos(name, priority, state) {
-    const params =
-      "name=" + name + "&priority=" + priority + "&done=" + state;
+    const params = "pageNumber" + pagesInfo.number +
+      "&name=" + name + "&priority=" + priority + "&done=" + state;
     setRequestParams((prevParams) => ({
       ...prevParams,
       params: params,
     }));
     setTodoChange(!todosChange);
   }
-
-  useEffect(() => {
-    handleAPI(...Object.values(requestParams)).then((data) => {
-      setTodos(data.content);
-    });
-  }, [todosChange]);
 
   return (
     <TodoContext.Provider
