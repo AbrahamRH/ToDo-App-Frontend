@@ -7,18 +7,19 @@ export const TodoContext = createContext();
 export function TodosContextProvider(props) {
   const [todos, setTodos] = useState([]);
   const [todosChange, setTodoChange] = useState(false);
-  const [requestParams, setRequestParams] = useState({
-    method: "GET",
-    endpoint: "/todos",
-    body: {},
-    params: "",
-  });
-
   const [pagesInfo, setPagesInfo] = useState({
     number: 0,
     totalPages: 0,
     first: true,
     last: false,
+  });
+
+  const [requestParams, setRequestParams] = useState({
+    method: "GET",
+    endpoint: "/todos",
+    body: {},
+    params: "",
+    page: pagesInfo.number,
   });
 
   useEffect(() => {
@@ -39,10 +40,12 @@ export function TodosContextProvider(props) {
 
   function setTodoDone(id) {
     handleAPI("POST", "/todos/" + id + "/done");
+    setTodoChange(!todosChange);
   }
 
   function setTodoUndone(id) {
     handleAPI("PUT", "/todos/" + id + "/undone");
+    setTodoChange(!todosChange);
   }
 
   function deleteTodo(id) {
@@ -55,11 +58,55 @@ export function TodosContextProvider(props) {
   }
 
   function searchTodos(name, priority, state) {
-    const params = "pageNumber" + pagesInfo.number +
-      "&name=" + name + "&priority=" + priority + "&done=" + state;
+    const params =
+      "&name=" +
+      name +
+      "&priority=" +
+      priority +
+      "&done=" +
+      state;
     setRequestParams((prevParams) => ({
       ...prevParams,
       params: params,
+      page: 0
+    }));
+    setTodoChange(!todosChange);
+  }
+
+  function selectPage() {}
+
+  function nextPage() {
+    if (!pagesInfo.last) {
+      setRequestParams((prevParams) => ({
+        ...prevParams,
+        page: requestParams.page + 1,
+      }));
+      setTodoChange(!todosChange);
+    }
+  }
+
+  function prevPage() {
+    if (!pagesInfo.first) {
+      setRequestParams((prevParams) => ({
+        ...prevParams,
+        page: requestParams.page--,
+      }));
+      setTodoChange(!todosChange);
+    }
+  }
+
+  function firstPage() {
+    setRequestParams((prevParams) => ({
+      ...prevParams,
+      page: 0,
+    }));
+    setTodoChange(!todosChange);
+  }
+
+  function lastPage() {
+    setRequestParams((prevParams) => ({
+      ...prevParams,
+      page: pagesInfo.totalPages - 1,
     }));
     setTodoChange(!todosChange);
   }
@@ -74,6 +121,12 @@ export function TodosContextProvider(props) {
         deleteTodo,
         updateTodo,
         searchTodos,
+        pagesInfo,
+        selectPage,
+        nextPage,
+        prevPage,
+        firstPage,
+        lastPage,
       }}
     >
       {props.children}
