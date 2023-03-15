@@ -3,10 +3,12 @@ import PriorityForm from "./PriorityForm.jsx";
 import StateForm from "./StateForm.jsx";
 import ButtonForm from "./ButtonForm.jsx";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TodoContext } from "../Context/TodosContext";
 
 export default function SearchControls() {
   const [values, setValues] = useState({ name: "", priority: "", state: "" });
+  const { searchTodos } = useContext(TodoContext);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -16,20 +18,14 @@ export default function SearchControls() {
     }));
   };
 
-  const handleButtonChange = () => {
-    alert(
-      "Nombre: " +
-        values.name +
-        "\nPriority: " +
-        values.priority +
-        "\nState: " +
-        values.state
-    );
+  const handleButtonChange = (e) => {
+    e.preventDefault();
+    searchTodos(values.name, values.priority, values.state);
   };
 
   return (
     <form className="controls">
-      <NameForm sendData={handleOnChange} isRequired={false}/>
+      <NameForm sendData={handleOnChange} isRequired={false} />
       <PriorityForm sendData={handleOnChange} />
       <StateForm sendData={handleOnChange} />
       <ButtonForm sendData={handleButtonChange} message={"Search"} />
