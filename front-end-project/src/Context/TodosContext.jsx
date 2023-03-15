@@ -47,7 +47,7 @@ export function TodosContextProvider(props) {
 
   useEffect(() => {
     handleAPI(...Object.values(requestParams)).then((data) => {
-      setTodos(data);
+      setTodos(data.content);
     });
   }, [todosChange]);
 
