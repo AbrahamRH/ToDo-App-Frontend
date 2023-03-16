@@ -1,7 +1,7 @@
 import Modal from "./Modal";
 import "../Assets/Styles/modal.css";
 
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useCallback } from "react";
 import { TodoContext } from "../Context/TodosContext";
 
 export default function TodoRow({ todo }) {
@@ -29,9 +29,9 @@ export default function TodoRow({ todo }) {
   }
 
 
-  const handleDeleteButton = () => {
+  const handleDeleteButton = useCallback(() => {
     deleteTodo(todo.id);
-  };
+  });
 
   useEffect( () => {
   }, [handleDeleteButton])
