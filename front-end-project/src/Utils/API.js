@@ -12,7 +12,6 @@ export default async function handleAPI(
       params === ""
         ? url + endpoint + "?pageNumber=" + page
         : url + endpoint + "?pageNumber=" + page + params;
-    console.log(request);
     const response = await fetch(request, settings(method, body));
     const data = await response.json();
     if (data.error == null) {

@@ -32,7 +32,7 @@ export function TodosContextProvider(props) {
         last: data.last,
       });
     });
-  }, [todosChange]);
+  }, [requestParams, todosChange]);
 
   function createTodo(todo) {
     setTodos(todos.push(todo));
@@ -73,7 +73,12 @@ export function TodosContextProvider(props) {
     setTodoChange(!todosChange);
   }
 
-  function selectPage() {}
+  function selectPage(page) {
+      setRequestParams((prevParams) => ({
+        ...prevParams,
+        page: page
+      }))
+  }
 
   function nextPage() {
     if (!pagesInfo.last) {
