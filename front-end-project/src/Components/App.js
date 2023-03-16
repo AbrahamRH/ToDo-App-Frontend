@@ -3,6 +3,7 @@ import SearchControls from "./SearchControls";
 import NewTodoButton from "./NewTodoButton";
 import TodosTable from "./TodosTable";
 import PaginationControl from "./PaginationControl";
+import Metrics from "./Metrics";
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
       <SearchControls />
       <NewTodoButton />
       <TodosTable />
-      <PaginationControl/>
+      <PaginationControl />
+      <Metrics />
     </div>
   );
 }

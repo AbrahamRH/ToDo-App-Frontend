@@ -1,0 +1,23 @@
+.metrics-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-self: stretch;
+  border: 1px solid #000;
+  padding-top: 100px;
+  height: 200px;
+}
+
+.metrics-container .total-average {
+  display: flex;
+  flex-direction: column;
+}
+
+.metrics-container .total-average p {
+  margin: 10px;
+  justify-self: center;
+}
+
+.metrics-container .priority-average ul{
+  margin: 10px;
+  list-style: none;
+}

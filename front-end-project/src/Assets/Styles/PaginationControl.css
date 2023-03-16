@@ -3,6 +3,7 @@
   display: flex;
   border: 1px solid #000;
   padding: 10px 30px;
+  margin: 15px 0;
 }
 
 .current-page{
