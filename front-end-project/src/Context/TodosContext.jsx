@@ -73,6 +73,7 @@ export function TodosContextProvider(props) {
     setTodoChange(!todosChange);
   }
 
+  // Pagination controls
   function selectPage(page) {
       setRequestParams((prevParams) => ({
         ...prevParams,
@@ -132,6 +133,7 @@ export function TodosContextProvider(props) {
         prevPage,
         firstPage,
         lastPage,
+        todosChange
       }}
     >
       {props.children}
