@@ -14,12 +14,18 @@ export function TodosContextProvider(props) {
     last: false,
   });
 
+  const [sortingParams, setSortingParams] = useState([
+    "priority,no",
+    "dueDate,no",
+  ]);
+
   const [requestParams, setRequestParams] = useState({
     method: "GET",
     endpoint: "/todos",
     body: {},
     params: "",
     page: pagesInfo.number,
+    sorting: [],
   });
 
   useEffect(() => {
@@ -111,6 +117,36 @@ export function TodosContextProvider(props) {
     setTodoChange(!todosChange);
   }
 
+  function sortTodos(field, direction) {
+    const newParam = field + "," + direction;
+    const params = [];
+
+    sortingParams.forEach((param) => {
+      const [_field] = param.split(",");
+      if (_field === field) {
+        params.push(newParam);
+      } else {
+        params.push(param);
+      }
+    });
+    setSortingParams(params);
+
+
+    const request = [];
+    sortingParams.forEach((param) => {
+      const [, _direction] = param.split(",");
+      if (_direction !== "no") {
+        request.push(param);
+      }
+    });
+
+    setRequestParams((prevParams) => ({
+      ...prevParams,
+      sorting: request,
+    }));
+    setTodoChange(!todosChange);
+  }
+
   return (
     <TodoContext.Provider
       value={{
@@ -128,6 +164,7 @@ export function TodosContextProvider(props) {
         firstPage,
         lastPage,
         todosChange,
+        sortTodos,
       }}
     >
       {props.children}

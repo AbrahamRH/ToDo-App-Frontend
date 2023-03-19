@@ -6,7 +6,7 @@ export default async function handleAPI(
   body = {},
   searchParams = "",
   page,
-  sorting = {}
+  sorting = []
 ) {
   try {
     const request = setRequest(endpoint, page, searchParams, sorting);
@@ -16,7 +16,7 @@ export default async function handleAPI(
     if (data.error == null) {
       return data;
     } else {
-      throw data.error
+      throw data.error;
     }
   } catch (e) {
     const data = {
@@ -39,8 +39,12 @@ function setRequest(endpoint, page, searchParams, sorting) {
   if (searchParams !== "") {
     request += searchParams;
   }
-  if (sorting !== {}) {
-    const sortingRequest = "&sort=" + sorting;
+  if (sorting !== []) {
+    let sortingRequest = "";
+    sorting.forEach((element) => {
+      sortingRequest = "&sort="+ element
+    });
+    request +=sortingRequest;
   }
   return request;
 }
