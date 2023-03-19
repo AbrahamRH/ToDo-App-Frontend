@@ -15,11 +15,11 @@ export default function TodosTable() {
           <th className="table-name">Name</th>
           <th className="table-priority">
             Priority
-            <SortButton/>
+            <SortButton field={"priority"}/>
           </th>
           <th className="table-due-date">
             Due Date
-            <SortButton/>
+            <SortButton field={"dueDate"}/>
           </th>
           <th className="table-actions">Actions</th>
         </tr>

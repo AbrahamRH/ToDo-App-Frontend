@@ -58,27 +58,21 @@ export function TodosContextProvider(props) {
   }
 
   function searchTodos(name, priority, state) {
-    const params =
-      "&name=" +
-      name +
-      "&priority=" +
-      priority +
-      "&done=" +
-      state;
+    const params = "&name=" + name + "&priority=" + priority + "&done=" + state;
     setRequestParams((prevParams) => ({
       ...prevParams,
       params: params,
-      page: 0
+      page: 0,
     }));
     setTodoChange(!todosChange);
   }
 
   // Pagination controls
   function selectPage(page) {
-      setRequestParams((prevParams) => ({
-        ...prevParams,
-        page: page
-      }))
+    setRequestParams((prevParams) => ({
+      ...prevParams,
+      page: page,
+    }));
   }
 
   function nextPage() {
@@ -133,7 +127,7 @@ export function TodosContextProvider(props) {
         prevPage,
         firstPage,
         lastPage,
-        todosChange
+        todosChange,
       }}
     >
       {props.children}
