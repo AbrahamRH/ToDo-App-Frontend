@@ -12,7 +12,6 @@ export default async function handleAPI(
     const request = setRequest(endpoint, page, searchParams, sorting);
     const response = await fetch(request, settings(method, body));
     const data = await response.json();
-    console.log(request);
     if (data.error == null) {
       return data;
     } else {
@@ -39,10 +38,10 @@ function setRequest(endpoint, page, searchParams, sorting) {
   if (searchParams !== "") {
     request += searchParams;
   }
-  if (sorting !== []) {
+  if (sorting.length !== 0) {
     let sortingRequest = "";
     sorting.forEach((element) => {
-      sortingRequest = "&sort="+ element
+      sortingRequest += "&sort="+ element
     });
     request +=sortingRequest;
   }
