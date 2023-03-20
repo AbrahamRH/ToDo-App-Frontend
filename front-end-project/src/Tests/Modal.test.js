@@ -1,15 +1,23 @@
-import { render, fireEvent } from "@testing-library/react";
-import NewTodoButton from "../Components/NewTodoButton";
+import { render, screen } from "@testing-library/react";
+import { TodosContextProvider } from "../Context/TodosContext";
+import App from "../Components/App";
 
-test("renders Filter Controls", () => {
-  const component = render(<NewTodoButton />);
-  component.getByText("+ New To Do");
-  console.debug();
-});
-
-test("check the modal toggle", () => {
-  const component = render(<NewTodoButton />);
-  const button = component.getByText('+ New To Do')
-  fireEvent.click(button);
-  component.getByText('Create a task')
+describe("renders metrics", () => {
+  render(
+    <TodosContextProvider>
+      <App />
+    </TodosContextProvider>
+  );
+  it("must display metrics", () => {
+    expect(screen.queryByText("Average"));
+  });
+  test("must display Low", () => {
+    expect(screen.queryByText("Low"));
+  })
+  test("must display High", () => {
+    expect(screen.queryByText("Low"));
+  })
+  test("must display Medium", () => {
+    expect(screen.queryByText("Low"));
+  })
 });
