@@ -14,10 +14,10 @@ export function TodosContextProvider(props) {
     last: false,
   });
 
-  const [sortingParams, setSortingParams] = useState([
+  let sortingParams = [
     "priority,no",
     "dueDate,no",
-  ]);
+  ]
 
   const [requestParams, setRequestParams] = useState({
     method: "GET",
@@ -129,7 +129,7 @@ export function TodosContextProvider(props) {
         params.push(param);
       }
     });
-    setSortingParams(params);
+    sortingParams = params;
 
 
     const request = [];

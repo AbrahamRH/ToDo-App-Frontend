@@ -1,21 +1,25 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { TodoContext } from "../Context/TodosContext";
 
 export default function SortButton({ field }) {
-  const {  } = useContext(TodoContext);
-  const [direction, setDirection] = useState(0); //index of array [no, asc, desc]
+  const { sortTodos } = useContext(TodoContext);
+  const [directionIndx, setDirectionIndx] = useState(0); //index of array [no, asc, desc]
   const directions = ["no", "asc", "desc"];
 
-  const handleClick = (e) => {
-    setDirection((direction + 1) % 3);
+  const handleClick = () => {
+    setDirectionIndx((directionIndx + 1) % 3);
   };
+
+  useEffect(() => {
+    sortTodos(field, directions[directionIndx]);
+  },[directionIndx])
 
   return (
     <span className="sorting" onClick={handleClick}>
       <button className="btn-srt" onClick={handleClick}>
-        {directions[direction] === "no" && "⇅"}
-        {directions[direction] === "asc" && "↑"}
-        {directions[direction] === "desc" && "↓"}
+        {directionIndx === 0 && "⇅"}
+        {directionIndx === 1 && "↑"}
+        {directionIndx === 2 && "↓"}
       </button>
     </span>
   );
