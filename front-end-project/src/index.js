@@ -7,11 +7,9 @@ import { TodosContextProvider } from "./Context/TodosContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <TodosContextProvider>
-      <App />
-    </TodosContextProvider>
-  </React.StrictMode>
+  <TodosContextProvider>
+    <App />
+  </TodosContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

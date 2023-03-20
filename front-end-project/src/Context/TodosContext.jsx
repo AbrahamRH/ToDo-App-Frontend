@@ -20,6 +20,7 @@ export function TodosContextProvider(props) {
     body: {},
     params: "",
     page: pagesInfo.number,
+    sorting: [],
   });
 
   useEffect(() => {
@@ -58,27 +59,21 @@ export function TodosContextProvider(props) {
   }
 
   function searchTodos(name, priority, state) {
-    const params =
-      "&name=" +
-      name +
-      "&priority=" +
-      priority +
-      "&done=" +
-      state;
+    const params = "&name=" + name + "&priority=" + priority + "&done=" + state;
     setRequestParams((prevParams) => ({
       ...prevParams,
       params: params,
-      page: 0
+      page: 0,
     }));
     setTodoChange(!todosChange);
   }
 
   // Pagination controls
   function selectPage(page) {
-      setRequestParams((prevParams) => ({
-        ...prevParams,
-        page: page
-      }))
+    setRequestParams((prevParams) => ({
+      ...prevParams,
+      page: page,
+    }));
   }
 
   function nextPage() {
@@ -117,6 +112,54 @@ export function TodosContextProvider(props) {
     setTodoChange(!todosChange);
   }
 
+  function sortTodos(field, direction) {
+    const newParam = field + "," + direction;
+    let request = requestParams.sorting;
+
+    if (requestParams.sorting.length > 0) {
+      if (requestParams.sorting.length === 1) {
+        let isTheSameField = false;
+        requestParams.sorting.forEach((prev) => {
+          isTheSameField = prev.includes(field) ? true : false;
+        });
+        if (!isTheSameField) {
+          if (direction !== "no") {
+            request.push(newParam);
+          }
+        } else {
+          if (direction === "no") {
+            request.pop();
+          } else {
+            request[0] = newParam;
+          }
+        }
+      }
+      if (requestParams.sorting.length === 2) {
+        if (direction === "no") {
+          requestParams.sorting.forEach((prevParams, index) => {
+            if (prevParams.includes(field)) {
+              request.splice(index,index)
+            }
+          });
+        } else {
+          requestParams.sorting.forEach((prevParams, index) => {
+            if (prevParams.includes(field)) {
+              request[index] = newParam;
+            }
+          });
+        }
+      }
+    } else {
+      request = direction === "no" ? [] : [newParam];
+    }
+
+    setRequestParams((prevParams) => ({
+      ...prevParams,
+      sorting: request,
+    }));
+    setTodoChange(!todosChange);
+  }
+
   return (
     <TodoContext.Provider
       value={{
@@ -133,7 +176,8 @@ export function TodosContextProvider(props) {
         prevPage,
         firstPage,
         lastPage,
-        todosChange
+        todosChange,
+        sortTodos,
       }}
     >
       {props.children}
