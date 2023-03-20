@@ -1,5 +1,6 @@
 import Modal from "./Modal";
 import "../Assets/Styles/modal.css";
+import "../Assets/Styles/todoRow.css";
 
 import { useContext, useState, useEffect, useCallback } from "react";
 import { TodoContext } from "../Context/TodosContext";
@@ -28,35 +29,44 @@ export default function TodoRow({ todo }) {
     document.body.classList.remove("active-modal");
   }
 
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleDeleteButton = useCallback(() => {
     deleteTodo(todo.id);
   });
 
-  useEffect( () => {
-  }, [handleDeleteButton])
+  useEffect(() => {}, [handleDeleteButton]);
+
+  if (isChecked) {
+  } else {
+  }
 
   return (
     <>
-    <tr>
-      <td className="checkbox">
-        <input
-          type="checkbox"
-          name="done-checkbox"
-          value={isChecked ? "done" : "undone"}
-          checked={isChecked}
-          onChange={handleCheck}
+      <tr className={isChecked ? "checked todo-row" : "todo-row"}>
+        <td>
+          <input
+            type="checkbox"
+            name="done-checkbox"
+            value={isChecked ? "done" : "undone"}
+            checked={isChecked}
+            onChange={handleCheck}
+          />
+        </td>
+        <td>{todo.name}</td>
+        <td>{todo.priority}</td>
+        <td>{todo.dueDate}</td>
+        <td className="button-data">
+          <button onClick={toggleModal}>Update</button>
+          <button onClick={handleDeleteButton}>Delete</button>
+        </td>
+      </tr>
+      {modal && (
+        <Modal
+          toggleModal={toggleModal}
+          toCreateTodo={false}
+          todoId={todo.id}
         />
-      </td>
-      <td>{todo.name}</td>
-      <td>{todo.priority}</td>
-      <td>{todo.dueDate}</td>
-      <td className="button-data">
-        <button onClick={toggleModal}>Update</button>
-        <button onClick={handleDeleteButton}>Delete</button>
-      </td>
-    </tr>
-      {modal && <Modal toggleModal={toggleModal} toCreateTodo={false} todoId={todo.id}/>}
+      )}
     </>
   );
 }
