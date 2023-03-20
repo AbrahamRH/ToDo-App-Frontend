@@ -29,32 +29,32 @@ export default function Metrics() {
       <div className="total-average">
         <h4>Average time to finish taks:</h4>
         <p>
-          -{total.days > 0 && <span>Days: {total.days}</span>}
-          {total.hours > 0 && <span>Hours: {total.hours}</span>}
-          {total.minutes > 0 && <span>Mins: {total.minutes}</span>}
-          {total.sec > 0 && <span>Secs: {total.sec}</span>}-
+          {total.days > 0 && <span>{total.days} days</span>}
+          {total.hours > 0 && <span>{total.hours} hours </span>}
+          {total.minutes > 0 && <span>{total.minutes} minutes</span>}
+          {total.sec > 0 && <span>{total.sec} seconds</span>}
         </p>
       </div>
       <div className="priority-average">
         <h4>Average time to finish tasks by priority</h4>
         <ul>
           <li>
-            Low: -{low.days > 0 && <span>Days: {low.days}</span>}
-            {low.hours > 0 && <span>Hours: {low.hours}</span>}
-            {low.minutes > 0 && <span>Mins: {low.minutes}</span>}
-            {low.sec > 0 && <span>Secs: {low.sec}</span>}-
+            Low: {low.days > 0 && <span>{low.days} days</span>}
+            {low.hours > 0 && <span>{low.hours} hours</span>}
+            {low.minutes > 0 && <span>{low.minutes} minutes</span>}
+            {low.sec > 0 && <span>{low.sec} seconds</span>}
           </li>
           <li>
-            Medium: -{medium.days > 0 && <span>Days: {total.days}</span>}
-            {medium.hours > 0 && <span>Hours: {medium.hours}</span>}
-            {medium.minutes > 0 && <span>Mins: {medium.minutes}</span>}
-            {medium.sec > 0 && <span>Secs: {medium.sec}</span>}-
+            Medium: {medium.days > 0 && <span> {total.days} days</span>}
+            {medium.hours > 0 && <span>{medium.hours} hours</span>}
+            {medium.minutes > 0 && <span>{medium.minutes} minutes</span>}
+            {medium.sec > 0 && <span>{medium.sec} seconds</span>}
           </li>
           <li>
-            High: -{high.days > 0 && <span>Days: {high.days}</span>}
-            {high.hours > 0 && <span>Hours: {high.hours}</span>}
-            {high.minutes > 0 && <span>Mins: {high.minutes}</span>}
-            {high.sec > 0 && <span>Secs: {high.sec}</span>}-
+            High: {high.days > 0 && <span>{high.days} days</span>}
+            {high.hours > 0 && <span>{high.hours} hours</span>}
+            {high.minutes > 0 && <span>{high.minutes} minutes</span>}
+            {high.sec > 0 && <span>{high.sec} seconds</span>}
           </li>
         </ul>
       </div>
