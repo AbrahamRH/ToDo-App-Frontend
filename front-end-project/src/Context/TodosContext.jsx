@@ -14,11 +14,6 @@ export function TodosContextProvider(props) {
     last: false,
   });
 
-  let sortingParams = [
-    "priority,no",
-    "dueDate,no",
-  ]
-
   const [requestParams, setRequestParams] = useState({
     method: "GET",
     endpoint: "/todos",
@@ -119,26 +114,44 @@ export function TodosContextProvider(props) {
 
   function sortTodos(field, direction) {
     const newParam = field + "," + direction;
-    const params = [];
+    let request = requestParams.sorting;
 
-    sortingParams.forEach((param) => {
-      const [_field] = param.split(",");
-      if (_field === field) {
-        params.push(newParam);
-      } else {
-        params.push(param);
+    if (requestParams.sorting.length > 0) {
+      if (requestParams.sorting.length === 1) {
+        let isTheSameField = false;
+        requestParams.sorting.forEach((prev) => {
+          isTheSameField = prev.includes(field) ? true : false;
+        });
+        if (!isTheSameField) {
+          if (direction !== "no") {
+            request.push(newParam);
+          }
+        } else {
+          if (direction === "no") {
+            request.pop();
+          } else {
+            request[0] = newParam;
+          }
+        }
       }
-    });
-    sortingParams = params;
-
-
-    const request = [];
-    sortingParams.forEach((param) => {
-      const [, _direction] = param.split(",");
-      if (_direction !== "no") {
-        request.push(param);
+      if (requestParams.sorting.length === 2) {
+        if (direction === "no") {
+          requestParams.sorting.forEach((prevParams, index) => {
+            if (prevParams.includes(field)) {
+              request.splice(index,index)
+            }
+          });
+        } else {
+          requestParams.sorting.forEach((prevParams, index) => {
+            if (prevParams.includes(field)) {
+              request[index] = newParam;
+            }
+          });
+        }
       }
-    });
+    } else {
+      request = direction === "no" ? [] : [newParam];
+    }
 
     setRequestParams((prevParams) => ({
       ...prevParams,
