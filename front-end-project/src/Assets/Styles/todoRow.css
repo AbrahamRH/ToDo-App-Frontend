@@ -3,5 +3,14 @@
   text-decoration: line-through;
 }
 
-.todo-row {
+.red-row {
+  background-color: rgb(196, 88, 74);
+}
+
+.yellow-row {
+  background-color: rgb(224, 226, 111);
+}
+
+.green-row {
+  background-color: rgb(137, 212, 107);
 }

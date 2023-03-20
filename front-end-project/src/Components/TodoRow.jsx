@@ -33,16 +33,28 @@ export default function TodoRow({ todo }) {
   const handleDeleteButton = useCallback(() => {
     deleteTodo(todo.id);
   });
-
   useEffect(() => {}, [handleDeleteButton]);
 
-  if (isChecked) {
-  } else {
+  let className = isChecked ? "checked" : "";
+
+  const time = Date.now()
+  const today = new Date(time);
+  const dueDate = new Date(todo.dueDate)
+  const timeLeft = Math.floor((dueDate-today)/(1000 * 3600 * 24)) + 1
+
+  if(todo.dueDate != null){
+    if(timeLeft > 14) {
+      className += " green-row";
+    } else if(timeLeft <= 14 && timeLeft > 7) {
+      className += " yellow-row";
+    } else {
+      className += " red-row";
+    }
   }
 
   return (
     <>
-      <tr className={isChecked ? "checked todo-row" : "todo-row"}>
+      <tr className={className}>
         <td>
           <input
             type="checkbox"

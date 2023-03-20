@@ -30,7 +30,7 @@ export default function Modal({ toggleModal, toCreateTodo, todoId }) {
       dueDate: todoValues.dueDate,
     };
 
-    if (todo.name != "") {
+    if (todo.name !== "") {
       if (toCreateTodo) {
         handleAPI("POST", "/todos", todo).then((data) => createTodo(data));
       } else {
