@@ -37,6 +37,7 @@ export function TodosContextProvider(props) {
 
   function createTodo(todo) {
     setTodos(todos.push(todo));
+    setTodoChange(!todosChange);
   }
 
   function setTodoDone(id) {
@@ -56,6 +57,7 @@ export function TodosContextProvider(props) {
 
   function updateTodo(id, todo) {
     handleAPI("PUT", "/todos/" + id, todo);
+    setTodoChange(!todosChange);
   }
 
   function searchTodos(name, priority, state) {
